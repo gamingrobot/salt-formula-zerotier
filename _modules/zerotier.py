@@ -138,9 +138,9 @@ def central_get_member(network_id, api_key=None):
 
     nodeId = node_id()
 
-    base_url = 'https://my.zerotier.com'
-    url = _urljoin(base_url, '/api/network/{networkId}/member/{nodeId}'.format(networkId=network_id, nodeId=nodeId))
-    headers = {'Authorization': "Bearer {0}".format(api_key), 'Content-type': 'application/json'}
+    base_url = 'https://api.zerotier.com'
+    url = _urljoin(base_url, '/api/v1/network/{networkId}/member/{nodeId}'.format(networkId=network_id, nodeId=nodeId))
+    headers = {'Authorization': "token {0}".format(api_key), 'Content-type': 'application/json'}
     member_info_raw = salt.utils.http.query(
         url,
         'GET',
@@ -202,9 +202,9 @@ def central_update_member(network_id, api_key=None, **config_args):
             member_info['config'][key] = config_args[key]
 
     # TODO: check we have network_id and node_id
-    base_url = 'https://my.zerotier.com'
-    url = _urljoin(base_url, '/api/network/{networkId}/member/{nodeId}'.format(networkId=network_id, nodeId=nodeId))
-    headers = {'Authorization': "Bearer {0}".format(api_key), 'Content-type': 'application/json'}
+    base_url = 'https://api.zerotier.com'
+    url = _urljoin(base_url, '/api/v1/network/{networkId}/member/{nodeId}'.format(networkId=network_id, nodeId=nodeId))
+    headers = {'Authorization': "token {0}".format(api_key), 'Content-type': 'application/json'}
 
     update_result = salt.utils.http.query(
         url,
