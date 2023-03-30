@@ -1,9 +1,10 @@
 zerotier-pkgrepo:
   pkgrepo.managed:
     - humanname: ZeroTier Ubuntu Repo
-    - name: {{ 'deb https://download.zerotier.com/debian/' + salt['grains.get']('oscodename') + ' ' + salt['grains.get']('oscodename') + ' main'}}
+    - name: deb [signed-by=/etc/apt/keyrings/zerotier.gpg] https://download.zerotier.com/debian/{{ salt.cmd.run('lsb_release -cs') }} {{ salt.cmd.run('lsb_release -cs') }} main
     - file: /etc/apt/sources.list.d/zerotier.list
     - key_url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x1657198823E52A61
+    - aptkey: False
     - clean_file: True
     - require_in:
       - pkg: zerotier
